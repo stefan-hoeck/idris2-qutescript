@@ -2,3 +2,8 @@
 type   = "local"
 path   = "."
 ipkg   = "qutescript.ipkg"
+
+[custom.all.qutescript-debug]
+type   = "local"
+path   = "examples/debug"
+ipkg   = "qutescript-debug.ipkg"
