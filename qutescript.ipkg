@@ -1,0 +1,10 @@
+package qutescript
+version    = 0.0.1
+authors    = "stefan-hoeck"
+brief      = "Writing userscripts for qutebrowser in Idris2"
+depends    = base    >= 0.6.0
+           , rio
+
+modules    = Qutescript.Request
+
+sourcedir  = "src"

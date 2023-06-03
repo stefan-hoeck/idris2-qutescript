@@ -1,0 +1,4 @@
+[custom.all.qutescript]
+type   = "local"
+path   = "."
+ipkg   = "qutescript.ipkg"
