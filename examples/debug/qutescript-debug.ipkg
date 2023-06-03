@@ -1,0 +1,10 @@
+package qutescript-debug
+version    = 0.0.1
+authors    = "stefan-hoeck"
+brief      = "Simple debugging of qutescripts"
+depends    = qutescript
+
+sourcedir  = "src"
+
+main       = Main
+executable = "qutescript-debug"

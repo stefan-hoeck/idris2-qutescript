@@ -7,6 +7,7 @@ depends    = base    >= 0.6.0
            , elab-util
            , filepath
 
-modules    = Qutescript.Request
+modules    = Qutescript
+           , Qutescript.Request
 
 sourcedir  = "src"
