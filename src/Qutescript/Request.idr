@@ -52,6 +52,7 @@ ModeData Command = CommandData
 
 public export
 record Request where
+  [noHints]
   constructor R
   mode            : QuteMode
   userAgent       : Maybe String

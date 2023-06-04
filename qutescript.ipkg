@@ -8,6 +8,7 @@ depends    = base    >= 0.6.0
            , filepath
 
 modules    = Qutescript
+           , Qutescript.Command
            , Qutescript.Request
 
 sourcedir  = "src"
