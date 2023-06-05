@@ -18,7 +18,7 @@ prog = do
   req <- request
   tmp <- map (/> "tmp_debug.html") curDir
   write tmp (htmlBody req)
-  cmd "open -t file://\{tmp}\n" req
+  cmd $ openIn Tab "file://\{tmp}"
 
 main : IO ()
 main = quteRun [printErr,printErr] (prog @{local})
