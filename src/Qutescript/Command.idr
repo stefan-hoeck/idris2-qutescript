@@ -25,21 +25,28 @@ FromChar Key where fromChar = Chr
 --          Flags and Options
 --------------------------------------------------------------------------------
 
-namespace Location
+namespace Target
 
   public export
-  data Location : Type where
-    Here          : Location
-    Tab           : Location
-    BackgroundTab : Location
-    Window        : Location
+  data Target : Type where
+    Normal        : Target
+    Tab           : Target
+    BackgroundTab : Target
+    Window        : Target
 
   export
-  Interpolation Location where
-    interpolate Here          = ""
+  Interpolation Target where
+    interpolate Normal        = ""
     interpolate Tab           = "--tab"
     interpolate BackgroundTab = "--bg"
     interpolate Window        = "--window"
+
+  export
+  tgt : Target -> String
+  tgt Normal        = "normal"
+  tgt Tab           = "tab"
+  tgt BackgroundTab = "tab-bg"
+  tgt Window        = "window"
 
 public export
 data Privacy = Private | NotPrivate
@@ -80,19 +87,21 @@ Interpolation Globality where
 
 public export
 data Command : Type where
-  Back       : Location -> Command
-  Forward    : Location -> Command
-  Help       : Location -> (topic : String) -> Command
-  Open       : Location -> Rel -> Privacy -> Security -> String -> Command
-  FakeKeys   : Globality -> List Key -> Command
-  InsertText : String -> Command
+  Back         : Target -> Command
+  ClickElement : Target -> (filter,value : String) -> Command
+  Close        : Command
+  FakeKeys     : Globality -> List Key -> Command
+  Forward      : Target -> Command
+  Help         : Target -> (topic : String) -> Command
+  InsertText   : String -> Command
+  Open         : Target -> Rel -> Privacy -> Security -> String -> Command
 
 public export %inline
 open' : String -> Command
-open' = Open Here NotRelated NotPrivate NotSecure
+open' = Open Normal NotRelated NotPrivate NotSecure
 
 public export %inline
-openIn : Location -> String -> Command
+openIn : Target -> String -> Command
 openIn l = Open l NotRelated NotPrivate NotSecure
 
 public export %inline
@@ -105,9 +114,11 @@ fakeKey = fakeKeys . pure
 
 export
 Interpolation Command where
-  interpolate (Back x)         = "back \{x}"
-  interpolate (Forward x)      = "forward \{x}"
-  interpolate (Help x t)       = "help \{x} \{t}"
-  interpolate (Open l r p s u) = "open \{l} \{r} \{p} \{s} \{u}"
-  interpolate (FakeKeys g ks)  = "fake-key \{g} \{concat $ map interpolate ks}"
-  interpolate (InsertText s)   = "insert-text \{s}"
+  interpolate (Back x)             = "back \{x}"
+  interpolate (ClickElement x f v) = "click-element -t \{tgt x} \{f} \{v}"
+  interpolate Close                = "close"
+  interpolate (FakeKeys g ks)      = "fake-key \{g} \{concat $ map interpolate ks}"
+  interpolate (Forward x)          = "forward \{x}"
+  interpolate (Help x t)           = "help \{x} \{t}"
+  interpolate (InsertText s)       = "insert-text \{s}"
+  interpolate (Open l r p s u)     = "open \{l} \{r} \{p} \{s} \{u}"

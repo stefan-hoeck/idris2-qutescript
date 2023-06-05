@@ -7,3 +7,8 @@ ipkg   = "qutescript.ipkg"
 type   = "local"
 path   = "examples/debug"
 ipkg   = "qutescript-debug.ipkg"
+
+[custom.all.qutescript-github]
+type   = "local"
+path   = "examples/github"
+ipkg   = "qutescript-github.ipkg"

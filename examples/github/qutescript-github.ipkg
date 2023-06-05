@@ -1,0 +1,10 @@
+package qutescript-github
+version    = 0.0.1
+authors    = "stefan-hoeck"
+brief      = "Logging into GitHub"
+depends    = qutescript
+
+sourcedir  = "src"
+
+main       = Main
+executable = "qutescript-github"
